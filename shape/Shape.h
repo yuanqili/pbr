@@ -23,10 +23,9 @@ public:
     const bool reverseOrientation;
     const bool transformSwapsHandedness;
 
-    Shape(
-            const Transform *ObjectToWorld,
-            const Transform *WorldToObject,
-            bool reverseOrientation
+    Shape(const Transform *ObjectToWorld,
+          const Transform *WorldToObject,
+          bool reverseOrientation
     ) : ObjectToWorld(ObjectToWorld),
         WorldToObject(WorldToObject),
         reverseOrientation(reverseOrientation),
@@ -35,7 +34,7 @@ public:
     }
 
     // For many operations, it is often useful to have a 3D bounding volume that encloses an object.
-    // Each Shape implementation must therefore be capable of bounding itself with an axis-aligned bounding box
+    // Each shape implementation must therefore be capable of bounding itself with an axis-aligned bounding box
     // represented by a Bound3f.
 
     // Returns a bounding box in shape's object space.
@@ -58,14 +57,13 @@ public:
     //   to object space if needed for intersection tests. The intersection information returned should be in world
     //   space.
     //
-    // Some Shape implementation support cutting away some of their surfaces using a texture; the testAlphaTexture
+    // Some shape implementation support cutting away some of their surfaces using a texture; the testAlphaTexture
     // parameter indicates whether those that do should perform this operation for the current intersection test.
 
-    virtual bool Intersect(
-            const Ray &ray,
-            Float *tHit,
-            SurfaceInteraction *isect,
-            testAlphaTexture = true
+    virtual bool Intersect(const Ray &ray,
+                           Float *tHit,
+                           SurfaceInteraction *isect,
+                           bool testAlphaTexture = true
     ) const = 0;
 
     // A predicate function determines whether or not an intersection occurs, without returning any details about the
